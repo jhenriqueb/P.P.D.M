@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'bares_hoteis_page.dart';
-import 'alta_gastronomia_page.dart';
-import 'cafes_page.dart';
-import 'perto_de_mim_page.dart';
-import 'fast_foods_page.dart';
-import 'destaques_page.dart';
+import 'pages/bares_hoteis_page.dart';
+import 'pages/alta_gastronomia_page.dart';
+import 'pages/cafes_page.dart';
+import 'pages/perto_de_mim_page.dart';
+import 'pages/fast_foods_page.dart';
+import 'pages/destaques_page.dart';
 
 
 class HomePage extends StatelessWidget {
