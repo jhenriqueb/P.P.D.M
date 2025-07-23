@@ -6,25 +6,18 @@ import 'perto_de_mim_page.dart';
 import 'fast_foods_page.dart';
 import 'destaques_page.dart';
 
-// -----------------------------
-// PÁGINAS DO BOTTOM NAVIGATION
-// -----------------------------
-// Cada página abaixo representa uma tela acessível pelo BottomNavigationBar.
-// Todas seguem o mesmo padrão visual e estrutura para manter a consistência.
 
-// Página inicial (Início)
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
   @override
   Widget build(BuildContext context) {
-    // Scaffold é o layout base de cada tela, fornecendo estrutura visual padrão do Material Design.
     return Scaffold(
       appBar: AppBar(title: const Text('Início'), centerTitle: true),
       body: const Center(child: Text('Página Inicial', style: TextStyle(fontSize: 20, color: Colors.white))),
     );
   }
 }
-// Página de Favoritos
+
 class FavoritosPage extends StatelessWidget {
   const FavoritosPage({super.key});
   @override
@@ -35,7 +28,7 @@ class FavoritosPage extends StatelessWidget {
     );
   }
 }
-// Página Top Foods
+
 class TopFoodsPage extends StatelessWidget {
   const TopFoodsPage({super.key});
   @override
@@ -46,7 +39,7 @@ class TopFoodsPage extends StatelessWidget {
     );
   }
 }
-// Página de Perfil
+
 class PerfilPage extends StatelessWidget {
   const PerfilPage({super.key});
   @override
@@ -58,52 +51,36 @@ class PerfilPage extends StatelessWidget {
   }
 }
 
-// -----------------------------
-// PONTO DE ENTRADA DO APP
-// -----------------------------
+
 void main() {
-  // runApp é a função que inicializa o app Flutter.
-  // O widget passado aqui será a raiz da árvore de widgets.
   runApp(const MyApp());
 }
 
-// -----------------------------
-// WIDGET PRINCIPAL DO APP
-// -----------------------------
-// StatelessWidget é usado quando o widget não precisa armazenar estado interno.
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // MaterialApp configura o app inteiro: tema, navegação, título, etc.
     return MaterialApp(
       title: 'Descoberta',
-      // Definição do tema global do app. O ThemeData permite personalizar cores, fontes, etc.
       theme: ThemeData(
-        brightness: Brightness.dark, // Define o tema escuro
+        brightness: Brightness.dark,
         colorScheme: ColorScheme.dark(
-          primary: Colors.blue.shade900, // Cor principal (AppBar, botões ativos)
-          secondary: Colors.blueAccent,  // Cor de destaque
-          background: Colors.black,      // Cor de fundo
+          primary: Colors.blue.shade900,
+          secondary: Colors.blueAccent,
+          background: Colors.black,
         ),
-        scaffoldBackgroundColor: Colors.black, // Fundo padrão das telas
+        scaffoldBackgroundColor: Colors.black,
         appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.black, // Fundo do AppBar
-          foregroundColor: Colors.white, // Cor dos textos/ícones do AppBar
-        ),
-        useMaterial3: true, // Usa o novo padrão visual do Material 3
+          backgroundColor: Colors.black,
+          foregroundColor: Colors.white,
+        useMaterial3: true,
       ),
-      home: const MainNavigation(), // Widget que controla a navegação principal
-      debugShowCheckedModeBanner: false, // Remove a faixa "debug" do canto
-    );
+      home: const MainNavigation(),
+      debugShowCheckedModeBanner: false,
   }
 }
 
-// -----------------------------
-// NAVEGAÇÃO PRINCIPAL (BOTTOM NAV)
-// -----------------------------
-// StatefulWidget é usado porque precisamos atualizar a tela ao trocar de aba.
 class MainNavigation extends StatefulWidget {
   const MainNavigation({super.key});
   @override
@@ -111,11 +88,8 @@ class MainNavigation extends StatefulWidget {
 }
 
 class _MainNavigationState extends State<MainNavigation> {
-  // Índice da aba selecionada. Começa em 1 (Descoberta).
   int _selectedIndex = 1;
-
-  // Lista de páginas correspondentes a cada item do BottomNavigationBar.
-  // A ordem dos widgets deve ser igual à ordem dos itens do BottomNavigationBar.
+  
   final List<Widget> _pages = const [
     HomePage(),
     DiscoveryPage(),
@@ -124,8 +98,6 @@ class _MainNavigationState extends State<MainNavigation> {
     PerfilPage(),
   ];
 
-  // Função chamada ao tocar em um item do BottomNavigationBar.
-  // Atualiza o índice e força o rebuild da tela.
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -134,16 +106,15 @@ class _MainNavigationState extends State<MainNavigation> {
 
   @override
   Widget build(BuildContext context) {
-    // Scaffold aqui serve apenas para o BottomNavigationBar e para exibir a página selecionada.
     return Scaffold(
-      body: _pages[_selectedIndex], // Exibe a página correspondente ao índice
+      body: _pages[_selectedIndex], 
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.blueGrey[900], // Cor de fundo da barra
-        selectedItemColor: Colors.blueAccent,   // Cor do item selecionado
-        unselectedItemColor: Colors.white70,    // Cor dos itens não selecionados
-        currentIndex: _selectedIndex,           // Índice atual
-        onTap: _onItemTapped,                   // Função ao tocar
-        type: BottomNavigationBarType.fixed,    // Permite mais de 3 itens
+        backgroundColor: Colors.blueGrey[900],
+        selectedItemColor: Colors.blueAccent, 
+        unselectedItemColor: Colors.white70, 
+        currentIndex: _selectedIndex,     
+        onTap: _onItemTapped,                 
+        type: BottomNavigationBarType.fixed,   
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Início'),
           BottomNavigationBarItem(icon: Icon(Icons.explore), label: 'Descoberta'),
@@ -156,16 +127,11 @@ class _MainNavigationState extends State<MainNavigation> {
   }
 }
 
-// -----------------------------
-// TELA PRINCIPAL DE DESCOBERTA
-// -----------------------------
-// Exibe os cards principais do app, cada um levando a uma página diferente.
 class DiscoveryPage extends StatelessWidget {
   const DiscoveryPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Lista de dados dos cards. Cada card tem título, ícone, subtítulo, destaque e página de destino.
     final List<_DiscoveryCardData> cards = [
       _DiscoveryCardData('Bares & Hotéis', Icons.local_bar, '42 Lugares', page: const BaresHoteisPage()),
       _DiscoveryCardData('Alta Gastronomia', Icons.restaurant, '15 Lugares', page: const AltaGastronomiaPage()),
@@ -174,8 +140,7 @@ class DiscoveryPage extends StatelessWidget {
       _DiscoveryCardData('Fast Foods', Icons.fastfood, '29 Lugares', page: const FastFoodsPage()),
       _DiscoveryCardData('Destaques', Icons.local_pizza, '21 Lugares', page: const DestaquesPage()),
     ];
-
-    // Scaffold fornece a estrutura visual da tela.
+    
     return Scaffold(
       appBar: AppBar(
         title: const Text('Descoberta', style: TextStyle(fontWeight: FontWeight.bold)),
@@ -184,19 +149,18 @@ class DiscoveryPage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        // GridView.builder cria uma grade de widgets dinamicamente.
-        // Aqui, usamos 2 colunas e espaçamento entre os cards.
+
         child: GridView.builder(
-          itemCount: cards.length, // Quantidade de cards
+          itemCount: cards.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,      // 2 colunas
-            mainAxisSpacing: 16,    // Espaço vertical
-            crossAxisSpacing: 16,   // Espaço horizontal
-            childAspectRatio: 1.2,  // Proporção largura/altura dos cards
+            crossAxisCount: 2,     
+            mainAxisSpacing: 16, 
+            crossAxisSpacing: 16,  
+            childAspectRatio: 1.2,  
           ),
           itemBuilder: (context, index) {
             final card = cards[index];
-            return _DiscoveryCard(card: card); // Cria o widget visual do card
+            return _DiscoveryCard(card: card); 
           },
         ),
       ),
@@ -204,37 +168,30 @@ class DiscoveryPage extends StatelessWidget {
   }
 }
 
-// -----------------------------
-// CLASSE DE DADOS DO CARD
-// -----------------------------
-// Armazena as informações necessárias para montar cada card.
+
 class _DiscoveryCardData {
-  final String title;      // Título do card
-  final IconData icon;     // Ícone do card
-  final String subtitle;   // Subtítulo (quantidade de lugares)
-  final bool highlight;    // Se o card deve ser destacado (azul)
-  final Widget page;       // Página de destino ao clicar
+  final String title;     
+  final IconData icon;  
+  final String subtitle; 
+  final bool highlight;    
+  final Widget page;   
   _DiscoveryCardData(this.title, this.icon, this.subtitle, {this.highlight = false, required this.page});
 }
 
-// -----------------------------
-// WIDGET VISUAL DO CARD
-// -----------------------------
-// Responsável por desenhar o card na tela e lidar com o clique.
+
 class _DiscoveryCard extends StatelessWidget {
   final _DiscoveryCardData card;
   const _DiscoveryCard({required this.card});
 
   @override
   Widget build(BuildContext context) {
-    // Material + InkWell fornecem efeito visual de clique (ripple) e arredondamento.
+   
     return Material(
-      color: card.highlight ? Colors.blue.shade900 : Colors.grey.shade900, // Destaque azul para "Perto de Mim"
+      color: card.highlight ? Colors.blue.shade900 : Colors.grey.shade900, 
       borderRadius: BorderRadius.circular(16),
       child: InkWell(
         borderRadius: BorderRadius.circular(16),
-        // Ao tocar, navega para a página correspondente usando Navigator.push.
-        // Isso empilha a nova página sobre a atual, permitindo voltar facilmente.
+       
         onTap: () {
           Navigator.push(
             context,
@@ -244,12 +201,12 @@ class _DiscoveryCard extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center, // Centraliza verticalmente
+            mainAxisAlignment: MainAxisAlignment.center, 
             children: [
               Icon(
                 card.icon,
                 size: 40,
-                color: card.highlight ? Colors.blueAccent : Colors.white, // Ícone azul se destacado
+                color: card.highlight ? Colors.blueAccent : Colors.white, 
               ),
               const SizedBox(height: 12),
               Text(
